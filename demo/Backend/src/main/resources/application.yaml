@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    username: myuser
+    password: secret
+    url: jdbc:postgresql://localhost/mydatabase
+  application:
+    name: Habit-Tracker-V2
+  sql:
+    init:
+      mode: always
+  threads:
+    virtual:
+      enabled: true
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  ai:
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY}
+        chat:
+          options:
+            model: gemini-2.5-flash-lite
+server:
+  port: 8080
+
+jwt:
+  public:
+    key: classpath:app.pub
+  private:
+    key:
+      classpath:app.key
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info

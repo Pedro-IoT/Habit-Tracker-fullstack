@@ -1,0 +1,10 @@
+package com.habit_tracker_V2.demo.Repository;
+import com.habit_tracker_V2.demo.Entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+import java.util.UUID;
+
+public interface UserRepository extends JpaRepository<User, UUID> {
+    Optional<User> findByEmail(String email);
+}
