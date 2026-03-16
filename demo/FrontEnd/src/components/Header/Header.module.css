@@ -1,0 +1,87 @@
+.headerWrapper {
+  width: 100%;
+}
+
+.headerContainer {
+  border-block-end: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1.25rem;
+  padding-block: 1rem;
+  margin: 0;
+  margin-inline: 70px;
+}
+
+.logoLink {
+  text-decoration: none;
+}
+
+.logo {
+  margin: 0;
+  font-size: var(--fs-700);
+  font-weight: bold;
+  background: linear-gradient(
+    to right,
+    var(--color-bronze-400),
+    var(--color-accent),
+    var(--color-accent-hover)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.actions {
+  margin-inline-end: 0;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.loginLink,
+.registerLink,
+.logoutButton {
+  text-decoration: none;
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.loginLink {
+  background-color: transparent;
+  color: var(--color-bronze-700);
+  border: 1px solid var(--color-bronze-700);
+}
+
+.logoutButton {
+  background-color: var(--color-danger);
+  background: transparent;
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+  font-size: var(--fs-200);
+  text-transform: uppercase;
+}
+
+.loginLink:hover,
+.registerLink:hover {
+  filter: brightness(1.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.logoutButton:hover {
+  background-color: var(--color-danger);
+  color: var(--color-surface);
+}
+
+.logoutButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

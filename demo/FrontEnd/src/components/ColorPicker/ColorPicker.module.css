@@ -1,0 +1,6 @@
+.colorPickerContainer {
+  background-color: var(--color-surface);
+  padding: 7px;
+  border-radius: 12px;
+  max-width: 350px;
+}

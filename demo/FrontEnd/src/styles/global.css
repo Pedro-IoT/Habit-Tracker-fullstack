@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'Urbanist';
+  src: local('Urbanist'), url('../fonts/Urbanist-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Marcellus';
+  src: local('Marcellus'), url('../fonts/Marcellus-Regular.ttf');
+}
+
+:root {
+  --color-accent: hsl(180, 100%, 15%);
+  --color-accent-hover: hsl(180, 60%, 35%);
+  --color-bronze-400: hsl(40, 90%, 55%);
+  --color-bronze-600: hsl(34, 48%, 58%);
+  --color-bronze-700: hsl(40, 90%, 35%);
+
+  --color-bg: hsl(195, 30%, 97%);
+  --color-bg-300: hsl(210, 20%, 98%);
+  --color-surface: hsl(0, 0%, 100%);
+
+  --color-border: hsl(220, 13%, 91%);
+
+  --color-text-main: hsl(210, 50%, 15%);
+  --color-text-muted: hsl(210, 15%, 45%);
+
+  --color-danger: hsl(0, 84%, 60%);
+  --color-success: hsl(150, 60%, 40%);
+
+  --fs-200: 0.875rem;
+  --fs-400: 1.125rem;
+  --fs-500: 1.3125rem;
+  --fs-600: 1.5rem;
+  --fs-700: 2.25rem;
+  --fs-800: 3rem;
+
+  --ff-base: 'Urbanist', sans-serif;
+  --ff-heading: 'Marcellus', serif;
+
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  line-height: 1.6;
+  background-color: var(--color-bg);
+  font-family: var(--ff-base);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.1;
+  font-family: var(--ff-heading);
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}

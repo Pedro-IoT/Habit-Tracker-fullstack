@@ -1,0 +1,205 @@
+.registerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-block-start: 10vh;
+  min-height: calc(100vh - 80px);
+  padding-inline: 20px;
+}
+
+.registerCard {
+  background-color: var(--color-surface);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  padding: 2.5rem 2.5rem;
+  border-radius: 28px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  max-width: 400px;
+  width: 100%;
+  animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.registerTitle {
+  font-size: 1.875rem;
+  font-weight: 800;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(
+    to right,
+    var(--color-bronze-400),
+    var(--color-accent)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.04em;
+}
+
+.registerDescription {
+  margin: 0 0 2rem 0;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border: none;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.registerForm label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-inline-start: 4px;
+}
+
+.registerForm input {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: var(--color-text-main);
+  transition: all 0.2s ease;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.registerForm input:focus,
+.registerForm input:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(0, 128, 128, 0.1);
+}
+
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 50%;
+  transition: color 0.2s;
+}
+
+.passwordToggle:hover {
+  color: var(--color-accent);
+}
+
+.registerButton {
+  margin-block-start: 0.5rem;
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 128, 128, 0.25);
+}
+
+.registerButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 128, 128, 0.4);
+}
+
+.registerButton:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(0, 128, 128, 0.25);
+}
+
+.registerButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.separator:not(:empty)::before {
+  margin-right: 1rem;
+}
+.separator:not(:empty)::after {
+  margin-left: 1rem;
+}
+
+.separator span {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.alternativeButtonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.loginLink {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.loginLink a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.loginLink a:hover {
+  text-decoration: underline;
+}

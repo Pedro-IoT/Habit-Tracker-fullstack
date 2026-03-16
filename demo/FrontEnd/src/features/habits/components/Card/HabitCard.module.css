@@ -1,0 +1,96 @@
+/* HabitCard.module.css */
+
+.habitCard {
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 16px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.habitName {
+  flex: 1;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0;
+}
+
+.habitStreak {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ff9500;
+  /* Laranja da Apple para streaks/fogo */
+  background: rgba(255, 149, 0, 0.1);
+  padding: 4px 10px;
+  border-radius: 980px;
+}
+
+.fireIcon {
+  font-size: 1rem;
+}
+
+/* Botões de Ação */
+.habitButton {
+  background: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.checkIcon,
+.deleteIcon {
+  font-size: 1.5rem;
+}
+
+.checkButton {
+  color: #34c759;
+  /* Verde iOS */
+}
+
+.checkButton:hover {
+  background-color: rgba(52, 199, 89, 0.1);
+}
+
+.deleteButton {
+  color: #ff3b30;
+  /* Vermelho iOS */
+}
+
+.deleteButton:hover {
+  background-color: rgba(255, 59, 48, 0.1);
+}
+
+/* Lógica de Hábito Concluído */
+.completedCard {
+  opacity: 0.6;
+}
+
+.completedCard .habitName {
+  text-decoration: line-through;
+  color: #86868b;
+}
+
+.completedCard .checkButton {
+  color: #86868b;
+  /* Botão de check fica cinza quando concluído */
+}
+
+.completedCard .habitStreak {
+  background: rgba(134, 134, 139, 0.1);
+  color: #86868b;
+}
