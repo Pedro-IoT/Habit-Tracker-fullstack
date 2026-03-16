@@ -23,6 +23,14 @@ spring:
         chat:
           options:
             model: gemini-2.5-flash-lite
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope: profile, email
 server:
   port: 8080
 
@@ -30,8 +38,7 @@ jwt:
   public:
     key: classpath:app.pub
   private:
-    key:
-      classpath:app.key
+    key: classpath:app.key
 
 management:
   endpoints:

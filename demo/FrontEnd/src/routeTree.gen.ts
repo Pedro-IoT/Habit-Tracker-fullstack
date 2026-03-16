@@ -11,7 +11,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as HabitsRouteImport } from './routes/habits'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 
 const RegisterLazyRouteImport = createFileRoute('/register')()
 const LoginLazyRouteImport = createFileRoute('/login')()
@@ -27,9 +27,9 @@ const LoginLazyRoute = LoginLazyRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/login.lazy').then((d) => d.Route))
-const HabitsRoute = HabitsRouteImport.update({
-  id: '/habits',
-  path: '/habits',
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexLazyRoute = IndexLazyRouteImport.update({
@@ -40,34 +40,34 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
-  '/habits': typeof HabitsRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginLazyRoute
   '/register': typeof RegisterLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
-  '/habits': typeof HabitsRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginLazyRoute
   '/register': typeof RegisterLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
-  '/habits': typeof HabitsRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginLazyRoute
   '/register': typeof RegisterLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/habits' | '/login' | '/register'
+  fullPaths: '/' | '/dashboard' | '/login' | '/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/habits' | '/login' | '/register'
-  id: '__root__' | '/' | '/habits' | '/login' | '/register'
+  to: '/' | '/dashboard' | '/login' | '/register'
+  id: '__root__' | '/' | '/dashboard' | '/login' | '/register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
-  HabitsRoute: typeof HabitsRoute
+  DashboardRoute: typeof DashboardRoute
   LoginLazyRoute: typeof LoginLazyRoute
   RegisterLazyRoute: typeof RegisterLazyRoute
 }
@@ -88,11 +88,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/habits': {
-      id: '/habits'
-      path: '/habits'
-      fullPath: '/habits'
-      preLoaderRoute: typeof HabitsRouteImport
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -107,7 +107,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  HabitsRoute: HabitsRoute,
+  DashboardRoute: DashboardRoute,
   LoginLazyRoute: LoginLazyRoute,
   RegisterLazyRoute: RegisterLazyRoute,
 }

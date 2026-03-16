@@ -53,7 +53,7 @@ public class AuthenticationController {
                 .body(loginResponse);
     }
     @GetMapping("/me")
-    public ResponseEntity<String> me(Authentication authentication) {
-        return ResponseEntity.ok(authentication.getName());
+    public ResponseEntity<LoginResponse> me(Authentication authentication) {
+        return ResponseEntity.ok(userService.handleMe(authentication.getName()));
     }
 }

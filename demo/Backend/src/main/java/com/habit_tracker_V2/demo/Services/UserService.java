@@ -46,4 +46,9 @@ public class UserService {
         return new LoginResponse(newUser.getName());
 
     }
+
+    public LoginResponse handleMe (String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        return new LoginResponse(user.getName());
+    }
 }
