@@ -4,11 +4,13 @@ import com.habit_tracker_V2.demo.DTO.Habits.HabitCompletionDTO;
 import com.habit_tracker_V2.demo.DTO.Habits.HabitCreateDTO;
 import com.habit_tracker_V2.demo.DTO.Habits.HabitResponseDTO;
 import com.habit_tracker_V2.demo.Services.HabitService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -59,6 +61,18 @@ public class HabitController {
             return  ResponseEntity.status(HttpStatus.OK).body(habit);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/by-date")
+    public ResponseEntity<List<HabitResponseDTO>> getAllHabitByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    LocalDate date,
+    Authentication authentication) {
+
+        String userEmail = authentication.getName();
+        List<HabitResponseDTO> habits = habitService.getHabitsCompletedOnDate(userEmail, date);
+
+        return ResponseEntity.status(HttpStatus.OK).body(habits);
+
     }
 
     @GetMapping("/dates")

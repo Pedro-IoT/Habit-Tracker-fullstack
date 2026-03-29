@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 public interface HabitCompletionRepository extends JpaRepository<HabitCompletion, Long> {
     boolean existsByHabit_IdAndCompletionDate(Long habit_id, LocalDate completion_date);
@@ -19,4 +20,14 @@ public interface HabitCompletionRepository extends JpaRepository<HabitCompletion
     """)
     List<LocalDate> findAllDatesDesc(Long habitId);
     void  deleteByHabit_Id(Long habitId);
+
+    @Query("""
+    select hc
+    from HabitCompletion hc
+    join fetch hc.habit h
+    where h.user.id = :userId
+     and hc.completionDate = :date
+    order by h.id
+    """)
+    List<HabitCompletion> findAllByUserIdAndDate(UUID userId, LocalDate date);
 }

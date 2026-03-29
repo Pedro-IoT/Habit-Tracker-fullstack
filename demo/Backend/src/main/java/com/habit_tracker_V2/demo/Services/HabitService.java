@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class HabitService {
@@ -103,6 +104,22 @@ public class HabitService {
                         h.getColor(),
                         h.getStreak(),
                         isDoneOnDate(h.getId(), LocalDate.now()),
+                        h.getScheduledDays()
+                ))
+                .toList();
+    }
+    public List<HabitResponseDTO> getHabitsCompletedOnDate(String email, LocalDate date) {
+        User user = findUserByEmail(email);
+        UUID userId = user.getId();
+        List<HabitCompletion> completions = habitCompletionRepository.findAllByUserIdAndDate(userId, date);
+        return completions.stream()
+                .map(HabitCompletion::getHabit)
+                .map(h -> new HabitResponseDTO(
+                        h.getId(),
+                        h.getTitle(),
+                        h.getColor(),
+                        h.getStreak(),
+                        true,
                         h.getScheduledDays()
                 ))
                 .toList();
