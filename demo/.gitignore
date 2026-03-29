@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 ## ENV files
-/backend/src/main/resources/.env
+/Backend/src/main/resources/.env
 
 ### STS ###
 .apt_generated
