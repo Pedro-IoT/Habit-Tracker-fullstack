@@ -5,8 +5,8 @@ import {
   listHabit,
   deleteHabit,
   patchHabit,
-  DayOfWeek,
   ScheduledDays,
+  getHabitsByDate,
 } from '../api/habitService';
 import { toast } from 'react-toastify';
 
@@ -132,4 +132,18 @@ export const usePatchHabits = () => {
   };
 
   return { patchHabit: handlePatch, isPatching: patchHabitMutation.isPending };
+};
+
+export const useHabitsByDate = (date?: string) => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['habitsByDate', date],
+    queryFn: () => getHabitsByDate(date as string),
+    enabled: !!date,
+  });
+
+  return {
+    habitsByDate: data ?? [],
+    isLoadingHabitsByDate: isLoading,
+    habitsByDateError: error,
+  };
 };

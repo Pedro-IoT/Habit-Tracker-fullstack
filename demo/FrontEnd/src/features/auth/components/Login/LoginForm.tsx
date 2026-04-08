@@ -8,22 +8,52 @@ import {
   handleLogin,
   handleSubmitLogin,
 } from '@/features/auth/api/authService';
+import {
+  usePasskeyAuthentication,
+  usePasskeySupport,
+} from '@/features/auth/hooks/usePasskey';
 import styles from './LoginForm.module.css';
+
+const PASSKEY_PROMPT_KEY = 'hasSeenPasskeyPrompt';
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
+  const isPasskeySupported = usePasskeySupport();
+  const { authenticate, isAuthenticating } = usePasskeyAuthentication();
+
+  const showPasskeyPromptIfNeeded = () => {
+    const hasSeenPrompt = localStorage.getItem(PASSKEY_PROMPT_KEY);
+    if (!hasSeenPrompt && isPasskeySupported) {
+      localStorage.setItem(PASSKEY_PROMPT_KEY, 'true');
+      toast.info('Tip: Add a passkey for faster sign-in! Click your profile icon to set one up.', {
+        autoClose: 6000,
+      });
+    }
+  };
+
   const mutation = useMutation({
     mutationKey: ['login'],
     mutationFn: handleLogin,
     onSuccess: () => {
+      showPasskeyPromptIfNeeded();
       navigate({ to: '/dashboard' });
     },
     onError: () => {
       toast.error('Failed to login, please check your credentials.');
     },
   });
+
+  const handlePasskeyLogin = async () => {
+    const result = await authenticate();
+    if (result.success) {
+      toast.success('Welcome back!');
+      navigate({ to: '/dashboard' });
+    } else if (result.error?.type !== 'CANCELLED_BY_USER') {
+      toast.error(result.error?.message || 'Passkey authentication failed');
+    }
+  };
 
   return (
     <div className={styles.loginContainer}>
@@ -88,10 +118,19 @@ export default function LoginForm() {
         </div>
 
         <div className={styles.alternativeButtonGroup}>
-          <button className={styles.alternativeButton} type="button">
-            <BsLock className={styles.alternativeIcon} />
-            Sign in with a Passkey
-          </button>
+          {isPasskeySupported && (
+            <button
+              className={styles.alternativeButton}
+              type="button"
+              onClick={handlePasskeyLogin}
+              disabled={isAuthenticating}
+            >
+              <BsLock className={styles.alternativeIcon} />
+              {isAuthenticating
+                ? 'Authenticating...'
+                : 'Sign in with a Passkey'}
+            </button>
+          )}
           <GoogleButton />
         </div>
 

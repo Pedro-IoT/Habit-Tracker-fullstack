@@ -1,40 +1,17 @@
-import { Link, useLocation, useNavigate } from '@tanstack/react-router';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiFetch } from '@/lib/apiClient';
-import { toast } from 'react-toastify';
+import { Link, useLocation } from '@tanstack/react-router';
+import UserMenu from '@/components/UserMenu/UserMenu';
 import styles from './Header.module.css';
 
 export default function Header() {
   const location = useLocation();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const isHabitPage = location.pathname === '/dashboard';
   const isHomePage = location.pathname === '/';
 
-  const mutation = useMutation({
-    mutationFn: async () => {
-      await apiFetch('/logout', {
-        method: 'POST',
-      });
-    },
-    onSuccess: () => {
-      queryClient.clear();
-      navigate({ to: '/login' });
-    },
-    onError: () => {
-      toast.error('Failed to logout');
-    },
-  });
-
   return (
     <header className={styles.headerWrapper}>
       <nav className={styles.headerContainer}>
-        <Link
-          className={styles.logoLink}
-          to="/"
-          disabled={mutation.isPending || isHabitPage}
-        >
+        <Link className={styles.logoLink} to="/" disabled={isHabitPage}>
           <h1 className={styles.logo}>Habit Tracker</h1>
         </Link>
 
@@ -50,15 +27,7 @@ export default function Header() {
               </Link>
             </>
           )}
-          {isHabitPage && (
-            <button
-              className={styles.logoutButton}
-              onClick={() => mutation.mutate()}
-              disabled={mutation.isPending}
-            >
-              {mutation.isPending ? 'Logging out...' : 'Logout'}
-            </button>
-          )}
+          {isHabitPage && <UserMenu />}
         </div>
       </nav>
     </header>

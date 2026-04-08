@@ -1,0 +1,177 @@
+/* ── Container ───────────────────────────────────────────── */
+
+.aiChatContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+
+.aiChatHeader h2 {
+  font-family: var(--ff-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+/* ── Chat window ─────────────────────────────────────────── */
+
+.chatWindow {
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.chatWindow::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chatWindow::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+/* ── Empty state ─────────────────────────────────────────── */
+
+.emptyChat {
+  font-family: var(--ff-base);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin: 0;
+}
+
+/* ── Message list ────────────────────────────────────────── */
+
+.messageList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+/* ── Individual messages ─────────────────────────────────── */
+
+.messageItem {
+  display: flex;
+}
+
+.messageItem.user {
+  justify-content: flex-end;
+}
+
+.messageItem.ai {
+  justify-content: flex-start;
+}
+
+.messageContent {
+  font-family: var(--ff-base);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 0.5rem 0.75rem;
+  border-radius: 14px;
+  max-width: 90%;
+  word-break: break-word;
+}
+
+/* User bubble */
+.user .messageContent {
+  background-color: var(--color-accent);
+  color: var(--color-surface);
+  border-bottom-right-radius: 4px;
+}
+
+/* AI bubble */
+.ai .messageContent {
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+  border-bottom-left-radius: 4px;
+}
+
+/* Loading state */
+.messageContent.loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ── Input form ──────────────────────────────────────────── */
+
+.aiChatForm {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.6rem;
+}
+
+.aiChatInput {
+  flex: 1;
+  resize: none;
+  font-family: var(--ff-base);
+  font-size: 0.8rem;
+  color: var(--color-text-main);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 0.4rem 0.6rem;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  line-height: 1.4;
+}
+
+.aiChatInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.aiChatInput:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
+}
+
+.aiChatInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Send button ─────────────────────────────────────────── */
+
+.aiChatButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--color-accent);
+  font-size: 1.4rem;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.aiChatButton:hover:not(:disabled) {
+  color: var(--color-accent-hover);
+  transform: scale(1.1);
+}
+
+.aiChatButton:disabled {
+  color: var(--color-border);
+  cursor: not-allowed;
+}

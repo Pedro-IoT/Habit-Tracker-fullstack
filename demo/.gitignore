@@ -4,8 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-## ENV files
-/Backend/src/main/resources/.env
+# all .env files anywhere under demo/
+**/.env
+**/.env.*
+
 
 ### STS ###
 .apt_generated
