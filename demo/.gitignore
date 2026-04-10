@@ -7,8 +7,9 @@ target/
 # all .env files anywhere under demo/
 **/.env
 **/.env.*
+secrets/
 
-
+**/dist
 ### STS ###
 .apt_generated
 .classpath

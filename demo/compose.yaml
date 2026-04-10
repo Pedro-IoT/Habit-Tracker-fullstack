@@ -1,6 +1,6 @@
 services:
   db:
-    image: 'pgvector/pgvector:pg16'
+    image: pgvector/pgvector:pg16
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${DB_NAME:-mydatabase}
@@ -8,8 +8,6 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - '5432:5432'
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 10s
@@ -18,32 +16,38 @@ services:
 
   backend:
     build:
-      context: .
+      context: ..
       dockerfile: demo/Dockerfile
     restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
     environment:
+      PORT: 8080
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-prod}
-      DB_URL: jdbc:postgresql://db:5432/${DB_NAME:-mydatabase}
+      DB_URL: ${DB_URL:-jdbc:postgresql://db:5432/${DB_NAME:-mydatabase}}
       DB_USERNAME: ${DB_USERNAME:-myuser}
       DB_PASSWORD: ${DB_PASSWORD:-secret}
-      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
-      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-disabled-google-client}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-disabled-google-secret}
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      SPRING_AUTOCONFIGURE_EXCLUDE: ${SPRING_AUTOCONFIGURE_EXCLUDE:-org.springframework.ai.model.google.genai.autoconfigure.chat.GoogleGenAiChatAutoConfiguration}
       JWT_PUBLIC_KEY_PATH: ${JWT_PUBLIC_KEY_PATH:-file:/run/secrets/app.pub}
       JWT_PRIVATE_KEY_PATH: ${JWT_PRIVATE_KEY_PATH:-file:/run/secrets/app.key}
-      APP_CORS_ALLOWED_ORIGINS: ${APP_CORS_ALLOWED_ORIGINS:-https://example.com}
+      APP_CORS_ALLOWED_ORIGINS: ${APP_CORS_ALLOWED_ORIGINS:-http://localhost:8080}
       APP_COOKIE_DOMAIN: ${APP_COOKIE_DOMAIN:-}
       APP_WEBAUTHN_ENABLED: ${APP_WEBAUTHN_ENABLED:-false}
       APP_WEBAUTHN_RP_NAME: ${APP_WEBAUTHN_RP_NAME:-habit-tracker}
-      APP_WEBAUTHN_RP_ID: ${APP_WEBAUTHN_RP_ID:-example.com}
+      APP_WEBAUTHN_RP_ID: ${APP_WEBAUTHN_RP_ID:-localhost}
     ports:
-      - '8080:8080'
+      - "8080:8080"
     volumes:
       - ./secrets/app.pub:/run/secrets/app.pub:ro
       - ./secrets/app.key:/run/secrets/app.key:ro
 
 volumes:
   postgres_data:
+
+
+
+

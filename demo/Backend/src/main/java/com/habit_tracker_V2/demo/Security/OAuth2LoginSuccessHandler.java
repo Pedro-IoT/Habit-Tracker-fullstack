@@ -30,7 +30,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         String email = oAuth2User.getAttribute("email");
         var cookie = cookieService.GenerateTokenCookie(email);
         response.addHeader("Set-Cookie", cookie.toString());
-        response.sendRedirect("http://localhost:5173/dashboard");
+        response.sendRedirect("/dashboard");
 
     }
 }

@@ -1,21 +1,23 @@
 spring:
+  profiles:
+    default: dev
   datasource:
-    username: myuser
-    password: secret
-    url: jdbc:postgresql://localhost/mydatabase
+    username: ${DB_USERNAME:myuser}
+    password: ${DB_PASSWORD:secret}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/mydatabase}
   application:
     name: Habit-Tracker-V2
   sql:
     init:
-      mode: always
+      mode: never
   threads:
     virtual:
       enabled: true
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: validate
+    show-sql: false
   ai:
     google:
       genai:
@@ -28,17 +30,33 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_ID}
-            client-secret: ${GOOGLE_CLIENT_SECRET}
+            client-id: ${GOOGLE_CLIENT_ID:disabled-google-client}
+            client-secret: ${GOOGLE_CLIENT_SECRET:disabled-google-secret}
             scope: profile, email
 server:
-  port: 8080
+  port: ${PORT:8080}
+  forward-headers-strategy: framework
 
 jwt:
   public:
-    key: classpath:/.env/app.pub
+    key: ${JWT_PUBLIC_KEY_PATH:classpath:/.env/app.pub}
   private:
-    key: classpath:/.env/app.key
+    key: ${JWT_PRIVATE_KEY_PATH:classpath:/.env/app.key}
+
+app:
+  ai:
+    enabled: ${APP_AI_ENABLED:false}
+  security:
+    cookie:
+      secure: false
+      same-site: Lax
+      domain:
+    cors:
+      allowed-origins: http://localhost:8080,http://localhost:5173
+    webauthn:
+      enabled: true
+      rp-name: habit-tracker
+      rp-id: localhost
 
 management:
   endpoints:

@@ -15,7 +15,6 @@ public class OAuth2LoginFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
                                         AuthenticationException authenticationException) throws IOException, ServletException {
-        System.out.println("Authentication Failure");
-        response.sendRedirect("http://localhost:5173/login?error=google_auth_failed");
+        response.sendRedirect("/login?error=google_auth_failed");
     }
 }

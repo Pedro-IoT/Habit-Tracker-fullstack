@@ -1,0 +1,25 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  sql:
+    init:
+      mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+app:
+  security:
+    cookie:
+      secure: false
+      same-site: Lax
+      domain:
+    cors:
+      allowed-origins: http://localhost:8080,http://localhost:5173
+    webauthn:
+      enabled: true
+      rp-name: habit-tracker
+      rp-id: localhost
+

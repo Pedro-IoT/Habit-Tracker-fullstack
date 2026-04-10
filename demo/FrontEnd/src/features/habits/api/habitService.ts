@@ -19,6 +19,13 @@ export type Habit = {
   scheduledDays: ScheduledDays;
 };
 
+export type HabitByDate = {
+  id: number;
+  name: string;
+  color: string;
+  streak: number;
+};
+
 export const createHabit = (
   name: string,
   color: string,
@@ -58,4 +65,13 @@ export const getCompletedDates = () => {
   return apiFetch<CompletedDatesResponse[]>('/habits/dates', {
     method: 'GET',
   });
+};
+
+export const getHabitsByDate = (date: string) => {
+  return apiFetch<HabitByDate[]>(
+    `/habits/by-date?date=${encodeURIComponent(date)}`,
+    {
+      method: 'GET',
+    }
+  );
 };

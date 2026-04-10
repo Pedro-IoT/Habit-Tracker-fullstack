@@ -1,0 +1,6 @@
+.git
+.idea
+demo/Backend/target
+demo/FrontEnd/node_modules
+demo/FrontEnd/dist
+

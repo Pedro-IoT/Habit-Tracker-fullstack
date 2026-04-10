@@ -3,6 +3,7 @@ package com.habit_tracker_V2.demo.Services;
 import com.habit_tracker_V2.demo.DTO.AI.AIRequestDTO;
 import com.habit_tracker_V2.demo.DTO.AI.AIResponseDTO;
 import com.habit_tracker_V2.demo.DTO.Habits.HabitResponseDTO;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
@@ -13,6 +14,7 @@ import java.util.List;
 
 
 @Service
+@ConditionalOnProperty(name = "app.ai.enabled", havingValue = "true")
 public class ServiceAI {
 
     private final ChatClient chatClient;

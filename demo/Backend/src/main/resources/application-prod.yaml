@@ -1,0 +1,25 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+app:
+  security:
+    cookie:
+      secure: true
+      same-site: Lax
+      domain: ${APP_COOKIE_DOMAIN:}
+    cors:
+      allowed-origins: ${APP_CORS_ALLOWED_ORIGINS:https://example.com}
+    webauthn:
+      enabled: ${APP_WEBAUTHN_ENABLED:false}
+      rp-name: ${APP_WEBAUTHN_RP_NAME:habit-tracker}
+      rp-id: ${APP_WEBAUTHN_RP_ID:example.com}
+
