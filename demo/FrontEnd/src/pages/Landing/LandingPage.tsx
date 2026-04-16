@@ -1,6 +1,7 @@
-import { Link } from '@tanstack/react-router';
-import { BsFire, BsCalendar3, BsShieldCheck } from 'react-icons/bs';
-import styles from './LandingPage.module.css';
+import { Link } from "@tanstack/react-router";
+import { BsFire, BsCalendar3, BsShieldCheck } from "react-icons/bs";
+import styles from "./LandingPage.module.css";
+import dashboardImage from "/public/Captura de tela de 2026-04-16 14-10-21.png";
 
 export default function LandingPage() {
   return (
@@ -28,7 +29,7 @@ export default function LandingPage() {
         </div>
         <div className={styles.heroImageWrapper}>
           <div className={styles.heroImage}>
-            <p>Todo: get dashboard screenshot once ready</p>
+            <img src={dashboardImage} alt="Dashboard Preview" />
           </div>
         </div>
       </main>

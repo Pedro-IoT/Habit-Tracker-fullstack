@@ -1,5 +1,5 @@
-import { Link } from '@tanstack/react-router';
-import styles from './Footer.module.css';
+import { Link } from "@tanstack/react-router";
+import styles from "./Footer.module.css";
 
 export default function Footer() {
   return (
@@ -17,14 +17,14 @@ export default function Footer() {
             <div className={styles.linkColumn}>
               <h4>Developer</h4>
               <a
-                href="https://github.com/Pedro-IoT"
+                href="https://github.com/Pedro-IoT/Habit-Tracker-fullstack"
                 target="_blank"
                 rel="noreferrer"
               >
                 GitHub Repo
               </a>
               <a
-                href="https://www.linkedin.com/in/pedro-io/"
+                href="https://www.linkedin.com/in/pedro-lucas-maia-paiva"
                 target="_blank"
                 rel="noreferrer"
               >
