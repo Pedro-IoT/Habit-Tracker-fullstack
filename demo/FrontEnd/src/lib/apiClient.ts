@@ -3,6 +3,7 @@ const CSRF_COOKIE_NAME = 'XSRF-TOKEN';
 const CSRF_HEADER_NAME = 'X-XSRF-TOKEN';
 
 let csrfBootstrapPromise: Promise<void> | null = null;
+let csrfHeaderToken: string | null = null;
 
 function readCookie(name: string): string | null {
     const cookie = document.cookie
@@ -29,16 +30,20 @@ function isUnsafeHttpMethod(method: string): boolean {
 }
 
 async function ensureCsrfCookie(): Promise<void> {
-    if (readCookie(CSRF_COOKIE_NAME)) {
-        return;
-    }
-
     if (!csrfBootstrapPromise) {
         csrfBootstrapPromise = fetch(`${BASE_URL}/csrf`, {
             method: 'GET',
             credentials: 'include',
         })
-            .then(() => undefined)
+            .then(async (response) => {
+                if (!response.ok) {
+                    throw new Error(`Failed to bootstrap CSRF token: ${response.status}`);
+                }
+
+                // Spring returns the request token in JSON; this value must be echoed back in X-XSRF-TOKEN.
+                const payload = (await response.json().catch(() => null)) as { token?: string } | null;
+                csrfHeaderToken = payload?.token ?? null;
+            })
             .finally(() => {
                 csrfBootstrapPromise = null;
             });
@@ -47,19 +52,13 @@ async function ensureCsrfCookie(): Promise<void> {
     await csrfBootstrapPromise;
 }
 
-export async function apiFetch<T>(
-    endpoint: string,
-    options?: RequestInit
-): Promise<T> {
-    const method = (options?.method || 'GET').toUpperCase();
-
+async function buildRequestConfig(method: string, options?: RequestInit): Promise<RequestInit> {
     if (isUnsafeHttpMethod(method)) {
         await ensureCsrfCookie();
     }
 
-    const url = resolveUrl(endpoint);
-    const csrfToken = readCookie(CSRF_COOKIE_NAME);
-    const config: RequestInit = {
+    const csrfToken = csrfHeaderToken || readCookie(CSRF_COOKIE_NAME);
+    return {
         ...options,
         method,
         credentials: 'include',
@@ -69,7 +68,23 @@ export async function apiFetch<T>(
             ...(options?.headers || {}),
         },
     };
-    const response = await fetch(url, config);
+}
+
+export async function apiFetch<T>(
+    endpoint: string,
+    options?: RequestInit
+): Promise<T> {
+    const method = (options?.method || 'GET').toUpperCase();
+    const url = resolveUrl(endpoint);
+
+    let response = await fetch(url, await buildRequestConfig(method, options));
+    if (response.status === 403 && isUnsafeHttpMethod(method)) {
+        // Token can rotate server-side; force refresh once before failing.
+        csrfHeaderToken = null;
+        await ensureCsrfCookie();
+        response = await fetch(url, await buildRequestConfig(method, options));
+    }
+
     if (!response.ok) {
         const errorText = await response.json().catch(() => null);
         throw new Error(errorText?.message || `API request failed with status ${response.status}`);
