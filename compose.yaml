@@ -18,8 +18,8 @@ services:
 
   backend:
     build:
-      context: .
-      dockerfile: demo/Dockerfile
+      context: ./demo
+      dockerfile: Dockerfile
     restart: unless-stopped
     depends_on:
       db:

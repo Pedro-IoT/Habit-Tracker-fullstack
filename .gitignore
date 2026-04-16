@@ -2,3 +2,5 @@
 External Libraries/
 Scratches and Consoles/
 demo/FrontEnd/node_modules
+**/node_modules
+**/node

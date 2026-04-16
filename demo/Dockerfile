@@ -1,11 +1,11 @@
 FROM maven:3.9.11-eclipse-temurin-25 AS builder
 WORKDIR /workspace
 
-COPY demo/pom.xml ./pom.xml
-COPY demo/Backend/pom.xml Backend/pom.xml
-COPY demo/FrontEnd/pom.xml FrontEnd/pom.xml
-COPY demo/Backend/src Backend/src
-COPY demo/FrontEnd FrontEnd
+COPY pom.xml ./pom.xml
+COPY Backend/pom.xml Backend/pom.xml
+COPY FrontEnd/pom.xml FrontEnd/pom.xml
+COPY Backend/src Backend/src
+COPY FrontEnd FrontEnd
 
 RUN mvn -B -DskipTests package
 
