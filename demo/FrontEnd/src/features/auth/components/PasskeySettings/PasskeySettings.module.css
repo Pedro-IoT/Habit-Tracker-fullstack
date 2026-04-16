@@ -1,0 +1,178 @@
+.container {
+  background-color: transparent;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0 0 0.5rem 0;
+}
+
+.icon {
+  color: var(--color-accent);
+}
+
+.description {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+.unsupported {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  padding: 1rem;
+  background-color: var(--color-bg-300);
+  border-radius: 8px;
+}
+
+.addSection {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  font-size: 0.875rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 12px 20px;
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.addButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);
+}
+
+.addButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.loading,
+.empty {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.passkeyItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: var(--color-bg-300);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+}
+
+.passkeyInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.passkeyIcon {
+  color: var(--color-accent);
+  font-size: 1.25rem;
+}
+
+.passkeyDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.passkeyName {
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.passkeyDate {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.passkeyActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.iconButton:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+}
+
+.deleteButton:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.editInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--color-accent);
+  border-radius: 8px;
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  font-size: 0.875rem;
+}
+
+.saveButton {
+  padding: 8px 16px;
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}

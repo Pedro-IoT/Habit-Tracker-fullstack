@@ -1,0 +1,64 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.dayView {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 320px;
+}
+
+.dayViewHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dayTitle {
+  margin: 0;
+  font-family: var(--ff-heading);
+  color: var(--color-text-main);
+}
+
+.helperText {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+}
+
+.historyItem {
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.colorDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.habitName {
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+.streak {
+  color: var(--color-text-muted);
+}
