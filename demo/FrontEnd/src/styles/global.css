@@ -1,11 +1,21 @@
 @font-face {
-  font-family: 'Urbanist';
-  src: local('Urbanist'), url('../fonts/Urbanist-Regular.ttf');
+  font-family: "Urbanist";
+  src:
+    local("Urbanist"),
+    url("../fonts/Urbanist-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Marcellus';
-  src: local('Marcellus'), url('../fonts/Marcellus-Regular.ttf');
+  font-family: "Marcellus";
+  src:
+    local("Marcellus"),
+    url("../fonts/Marcellus-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
@@ -34,8 +44,8 @@
   --fs-700: 2.25rem;
   --fs-800: 3rem;
 
-  --ff-base: 'Urbanist', sans-serif;
-  --ff-heading: 'Marcellus', serif;
+  --ff-base: "Urbanist", sans-serif;
+  --ff-heading: "Marcellus", serif;
 
   scroll-behavior: smooth;
 }

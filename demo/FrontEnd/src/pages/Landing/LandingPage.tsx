@@ -1,8 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { BsFire, BsCalendar3, BsShieldCheck } from "react-icons/bs";
 import styles from "./LandingPage.module.css";
-
-const dashboardImage = "./public/DashboardPreview.png";
+import dashboardImage from "../../assets/images/DashboardPreview.png";
 
 export default function LandingPage() {
   return (
