@@ -2,11 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { BsFire, BsCalendar3, BsShieldCheck } from "react-icons/bs";
 import styles from "./LandingPage.module.css";
 
-<<<<<<< HEAD
-const dashboardImage = "/Captura de tela de 2026-04-16 14-10-21.png";
-=======
 const dashboardImage = "./public/DashboardPreview.png";
->>>>>>> 80bb471 (fix(frontend): fix image path bug)
 
 export default function LandingPage() {
   return (
