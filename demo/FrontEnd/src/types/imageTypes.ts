@@ -1,8 +1,2 @@
-declare module '*.svg' {
-  const content: string;
-  export default content;
-}
-declare module '*.png' {
-  const content: string;
-  export default content;
-}
+// Legacy placeholder file intentionally left without module declarations.
+// Vite's `vite/client` already provides asset module typings used by this project.
